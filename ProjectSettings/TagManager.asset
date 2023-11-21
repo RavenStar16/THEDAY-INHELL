@@ -8,6 +8,8 @@ TagManager:
   - Diamond
   - Coin
   - Text
+  - Checkpoint
+  - doors
   layers:
   - Default
   - TransparentFX
