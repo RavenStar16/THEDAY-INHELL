@@ -7,6 +7,7 @@ public class DiamondManager : MonoBehaviour
 {
     public int diamondCount;
     public Text diamondText;
+    public GameObject doors;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +18,10 @@ public class DiamondManager : MonoBehaviour
     void Update()
     {
         diamondText.text = "Diamond Count: " + diamondCount.ToString();
+
+        if(diamondCount == 3)
+        {
+            Destroy(doors);
+        }
     }
 }
