@@ -10,6 +10,8 @@ TagManager:
   - Text
   - Checkpoint
   - doors
+  - Enemy
+  - Heart
   layers:
   - Default
   - TransparentFX
