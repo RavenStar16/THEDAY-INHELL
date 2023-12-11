@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     Vector2 checkpointPos;
     SpriteRenderer spriteRenderer;
-    Collider2D coll;
+    public GameObject winningObject;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        coll = GetComponent<Collider2D>();
     }
+
     private void Start()
     {
         checkpointPos = transform.position;
@@ -24,6 +25,11 @@ public class GameController : MonoBehaviour
         {
             Die();
         }
+
+        if (collision.CompareTag("Player"))
+        {
+            ShowWinScreen();
+        }
     }
 
     public void UpdateCheckpoint(Vector2 pos)
@@ -33,7 +39,7 @@ public class GameController : MonoBehaviour
 
     void Die()
     {
-         StartCoroutine(Respawn(0.2f));
+        StartCoroutine(Respawn(0.2f));
     }
 
 
@@ -43,5 +49,23 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(duration);
         transform.position = checkpointPos;
         spriteRenderer.enabled = true;
+
+    }
+
+    private void ShowWinScreen()
+    {
+        SceneManager.LoadScene("Win", LoadSceneMode.Additive);
+        StartCoroutine(EndScreen());
+    }
+
+    IEnumerator EndScreen()
+    {
+        yield return new WaitForSeconds(5f);
+        RestartGame();
+    }
+
+    private void RestartGame()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }

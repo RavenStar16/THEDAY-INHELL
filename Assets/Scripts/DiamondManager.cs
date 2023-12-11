@@ -19,7 +19,7 @@ public class DiamondManager : MonoBehaviour
     {
         diamondText.text = "Diamond Count: " + diamondCount.ToString();
 
-        if(diamondCount == 3)
+        if(diamondCount == 9)
         {
             Destroy(doors);
         }

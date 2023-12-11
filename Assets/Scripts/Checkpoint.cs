@@ -19,4 +19,5 @@ public class Checkpoint : MonoBehaviour
             gameController.UpdateCheckpoint(respawnPoint.position);
         }
     }
+
 }

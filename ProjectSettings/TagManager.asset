@@ -12,6 +12,7 @@ TagManager:
   - doors
   - Enemy
   - Heart
+  - WinningObject
   layers:
   - Default
   - TransparentFX
