@@ -8,15 +8,64 @@ public class GameController : MonoBehaviour
     Vector2 checkpointPos;
     SpriteRenderer spriteRenderer;
     public GameObject winningObject;
+    public GameObject gameOver, Heart1, Heart2, Heart3;
+    public static int health;
+
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        Heart1 = GameObject.Find("Heart1");
+        Heart2 = GameObject.Find("Heart2");
+        Heart3 = GameObject.Find("Heart3");
+        gameOver = GameObject.Find("gameOverObject");
     }
 
     private void Start()
     {
+        Heart1 = GameObject.Find("Heart1");
+        Heart2 = GameObject.Find("Heart2");
+        Heart3 = GameObject.Find("Heart3");
+        gameOver = GameObject.Find("gameOverObject");
+
         checkpointPos = transform.position;
+        health = 3;
+        Heart1.gameObject.SetActive(true);
+        Heart2.gameObject.SetActive(true);
+        Heart3.gameObject.SetActive(true);
+        gameOver.gameObject.SetActive(false);
+    }
+
+    void Update()
+    {
+        switch (health)
+        {
+            case 3:
+                Heart1.gameObject.SetActive(true);
+                Heart2.gameObject.SetActive(true);
+                Heart3.gameObject.SetActive(true);
+                break;
+            case 2:
+                Heart1.gameObject.SetActive(true);
+                Heart2.gameObject.SetActive(true);
+                Heart3.gameObject.SetActive(false);
+                break;
+            case 1:
+                Heart1.gameObject.SetActive(true);
+                Heart2.gameObject.SetActive(false);
+                Heart3.gameObject.SetActive(false);
+                break;
+            default:
+                Heart1.gameObject.SetActive(false);
+                Heart2.gameObject.SetActive(false);
+                Heart3.gameObject.SetActive(false);
+                gameOver.gameObject.SetActive(true);
+                Time.timeScale = 0;
+                break;
+            
+
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,12 +73,14 @@ public class GameController : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             Die();
+            Debug.Log("Killed");
         }
 
         if (collision.CompareTag("Player"))
         {
             ShowWinScreen();
         }
+
     }
 
     public void UpdateCheckpoint(Vector2 pos)

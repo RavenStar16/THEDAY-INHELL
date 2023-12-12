@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isJumping;
 
-    public DiamondManager dm; 
+    public DiamondManager dm;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +57,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(other.gameObject);
             dm.diamondCount++;
+        }
+
+        if(other.gameObject.tag == "Enemy")
+        {
+            GameController.health -= 1;
         }
     }
 }
